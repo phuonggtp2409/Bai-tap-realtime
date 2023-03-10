@@ -20,7 +20,19 @@ io.on("connection", (socket) => {
             soLanNoiBayCuaNguoiGuiHienTai++;
             danhSachNguoiGui[i].soLanNoiBay = soLanNoiBayCuaNguoiGuiHienTai;
           } else {
-            io.emit("chat message", msg);
+            var chuoiMoi = "";
+            for (let i = 0; i < msg.length; i++) {
+              if (msg[i] == 'y' && msg[i + 1] == 'e' && msg[i + 2] == 'u') {
+                chuoiMoi += '❤';
+                i += 2;
+                
+              } else {
+                chuoiMoi += msg[i]
+              }
+    
+            }
+            console.log(chuoiMoi);
+            io.emit("chat message", chuoiMoi);
           }
         } else {
           io.emit("chat message", {
@@ -30,23 +42,10 @@ io.on("connection", (socket) => {
           danhSachNguoiGui[i].soLanNoiBay = 0;
         }
       }
-      // var msg = "anh yeu em"
-      var chuoiMoi = "";
-      for (let i = 0; i < msg.length - 1; i++) {
-        if (msg[i] == "y" && msg[i + 1] == "e" && msg[i + 2] == "u") {
-          // var traiTim = msg[i]+msg[i+1]+msg[i+2]
-          chuoiMoi += "<3";
-        }
-        var traiTim = "<3";
-        for (let i = 0; i < traiTim; i++) {
-          chuoiMoi += msg[i];
-        }
-        for (let j = traiTim; j < msg.length - 1; j++) {
-          chuoiMoi += msg[j];
-        }
-      }
+      
+   
     }
-    io.emit("chat message", chuoiMoi);
+    
 
     // kí tự dảo ngược
     // var reverse = " "
