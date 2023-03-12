@@ -13,10 +13,7 @@ io.on("connection", (socket) => {
   socket.on("chat message", (msg) => {
     for (let i = 0; i < danhSachNguoiGui.length; i++) {
       if (danhSachNguoiGui[i].id == socket.id) {
-
         console.log("id: " + socket.id);
-
-
         let soLanNoiBayCuaNguoiGuiHienTai = danhSachNguoiGui[i].soLanNoiBay;
         if (soLanNoiBayCuaNguoiGuiHienTai < 3) {
           if (msg == "fuck you") {
@@ -28,29 +25,30 @@ io.on("connection", (socket) => {
             var chuoiMoi = "";
             for (let i = 0; i < msg.length; i++) {
               if (msg[i] == 'y' && msg[i + 1] == 'e' && msg[i + 2] == 'u') {
-                chuoiMoi += '❤';
+                chuoiMoi += '<3';
                 i += 2;
-                
               } else {
                 chuoiMoi += msg[i]
               }
-    
             }
             console.log(chuoiMoi);
             io.emit("chat message", chuoiMoi);
           }
         } else {
-          io.emit("chat message", {
+        io.emit("chat message", {
             thongBao: "Tai khoan cua ban da bị khoa",
             idNguoiBiKhoa: socket.id,
           });
           danhSachNguoiGui[i].soLanNoiBay = 0;
         }
-
       
-  
-
-      }
+        var resXinChao = ["Chao ban, toi co the giup gi cho ban", "Chao ban nhe", "Chao buoi sang ban"]
+        if (msg.includes("xin chao")){
+        const random = Math.floor(Math.random() * resXinChao.length)
+        console.log(random, resXinChao[random]);
+        io.emit("chat message", resXinChao[random]);
+        }
+      } 
     }
 
   });

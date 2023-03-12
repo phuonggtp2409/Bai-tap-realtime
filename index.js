@@ -19,21 +19,7 @@ io.on("connection", (socket) => {
             io.emit("chat message", "****");
             soLanNoiBayCuaNguoiGuiHienTai++;
             danhSachNguoiGui[i].soLanNoiBay = soLanNoiBayCuaNguoiGuiHienTai;
-          } else {
-            var chuoiMoi = "";
-            for (let i = 0; i < msg.length; i++) {
-              if (msg[i] == 'y' && msg[i + 1] == 'e' && msg[i + 2] == 'u') {
-                chuoiMoi += '❤';
-                i += 2;
-                
-              } else {
-                chuoiMoi += msg[i]
-              }
-    
-            }
-            console.log(chuoiMoi);
-            io.emit("chat message", chuoiMoi);
-          }
+          } 
         } else {
           io.emit("chat message", {
             thongBao: "Tai khoan cua ban da bị khoa",
